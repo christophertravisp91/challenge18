@@ -1,8 +1,11 @@
-const { Schema, model } = require('mongoose');
-const UserSchema = new Schema(
+const { Schema, model, Types } = require('mongoose');
+const dateFormat = require("../utils/dateFormat");
+
+const thoughtSchema = new Schema(
 {
-    firstName: {
+    userName: {
         type: String,
+        required: true,
         trim: true,
         required: 'First Name is Required'
     },
@@ -39,10 +42,10 @@ const UserSchema = new Schema(
     }
 );
 
-UserSchema.virtual('username').get(function() {
-    return this.email.slice(0, this.email.indexOf('@'));
+thoughtSchema.virtual('reactionCount').get(function() {
+    return this.reaction.length;
 }); 
 
-const User = model('User', UserSchema);
+const Thought = model('Thought', thoughtSchema);
 
 module.exports = User;
