@@ -56,8 +56,10 @@ updateUser({ params, body }, res) {
     });
 },
 deleteUser({ params }, res) {
-    User.findOneAndDelete({ __id: params.id })
+    User.findOneAndDelete({ _id: params.id })
     .then(dbUserData => res.json(dbUserData))
     .catch(err => res.json(err));
     },
 };
+
+module.exports = userController;
